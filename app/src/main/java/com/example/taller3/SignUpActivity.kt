@@ -72,11 +72,12 @@ class SignUpActivity : AppCompatActivity()
                     if (user != null)
                     {
                     // Update user info
-                        val myUser = MyUser()
+                        val myUser = User()
                         myUser.name = pTxtNameIn.text.toString()
                         myUser.lastName = pTxtLastNameIn.text.toString()
                         myUser.id = pTxtIdIn.text.toString()
                         myUser.available = true
+                        myUser.uid = user.uid
                         myRef = database.getReference(PATH_USERS+auth.currentUser!!.uid)
                         myRef.setValue(myUser)
                         val upcrb = UserProfileChangeRequest.Builder()

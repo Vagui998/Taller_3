@@ -9,13 +9,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:context=".ActiveUsersActivity">
+        tools:context=".TrackUserActivity">
 
         <ImageView
             android:id="@+id/fireBaseImg"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="16dp"
             android:background="@drawable/white_circle"
             android:padding="8dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -24,10 +24,10 @@
             app:srcCompat="@drawable/firebase_logo" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="24dp"
             android:background="@drawable/rounded_rectangle"
@@ -39,21 +39,38 @@
             app:layout_constraintTop_toBottomOf="@id/fireBaseImg">
 
             <TextView
-                android:id="@+id/availableUsersLbl"
-                android:layout_width="330dp"
+                android:id="@+id/mapLbl"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="Usuarios Disponibles:"
+                android:text="Mapa:"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/availableUsersRecView"
-                android:layout_width="wrap_content"
+            <fragment
+                android:id="@+id/map"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="350dp"
+                android:layout_height="350dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                tools:layout_marginEnd="8dp" />
+
+            <TextView
+                android:id="@+id/distanceTxt"
+                android:layout_width="350dp"
                 android:layout_height="wrap_content"
-                android:padding="8dp" />
+                android:layout_gravity="center"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="El usuario seleccionado se encuentra a"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
 
         </LinearLayout>
 

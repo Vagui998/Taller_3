@@ -43,41 +43,47 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="40dp"
             android:layout_marginEnd="16dp"
+            android:layout_marginBottom="24dp"
             android:background="@drawable/rounded_rectangle"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/profilePicImg">
 
             <TextView
-                android:id="@+id/emailLbl"
-                android:layout_width="350dp"
+                android:id="@+id/availableUsersLbl"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Email:"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/editTextEmailAddress"
-                android:layout_width="350dp"
+                android:layout_width="330dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:autofillHints="emailAddress"
+                android:background="@drawable/rounded_grey_rectangle"
                 android:ems="10"
                 android:hint="Ingrese su Email"
-                android:textColor="@color/black"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:padding="8dp"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/nameLbl"
-                android:layout_width="350dp"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Nombre:"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -85,21 +91,24 @@
 
             <EditText
                 android:id="@+id/editTextName"
-                android:layout_width="350dp"
+                android:layout_width="330dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:autofillHints="name"
+                android:background="@drawable/rounded_grey_rectangle"
                 android:ems="10"
                 android:hint="Ingrese su Nombre"
-                android:textColor="@color/black"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/lastNameLbl"
-                android:layout_width="350dp"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Apellido:"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
@@ -107,63 +116,71 @@
 
             <EditText
                 android:id="@+id/editTextLastName"
-                android:layout_width="350dp"
+                android:layout_width="330dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:autofillHints="name"
+                android:background="@drawable/rounded_grey_rectangle"
                 android:ems="10"
                 android:hint="Ingrese su Apellido"
-                android:textColor="@color/black"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:padding="8dp"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/passwordLbl"
-                android:layout_width="350dp"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Contraseña:"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/editTextPassword"
-                android:layout_width="350dp"
+                android:layout_width="330dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:autofillHints="password"
+                android:background="@drawable/rounded_grey_rectangle"
                 android:ems="10"
                 android:hint="Ingrese su Contraseña"
-                android:textColor="@color/black"
-                android:inputType="textPassword" />
+                android:inputType="textPassword"
+                android:padding="8dp"
+                android:textColor="@color/black" />
 
             <TextView
                 android:id="@+id/idLbl"
-                android:layout_width="350dp"
+                android:layout_width="330dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
                 android:text="Numero de Identificación:"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
             <EditText
                 android:id="@+id/editTextId"
-                android:layout_width="350dp"
+                android:layout_width="330dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:autofillHints="name"
+                android:background="@drawable/rounded_grey_rectangle"
                 android:ems="10"
+                android:hint="Ingrese su Identificación"
                 android:inputType="number"
-                android:textColor="@color/black"
-                android:hint="Ingrese su Identificación" />
+                android:padding="8dp"
+                android:textColor="@color/black" />
 
             <Button
                 android:id="@+id/signUpBtn"
                 android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginBottom="8dp"
                 android:text="Registrar Cuenta" />
 

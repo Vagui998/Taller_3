@@ -51,13 +51,18 @@ class MainMenuActivity : AppCompatActivity(), OnMapReadyCallback,
             0 -> {
                 if((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED))
                 {
-                    //Aqui va el proceso pa sacar los datos
-                    Toast.makeText(this, "Permiso Otorgado", Toast.LENGTH_LONG).show()
-
+                    this.onMapReady(mMap!!)
                 }
                 else
                 {
-                    Toast.makeText(this, "Permiso Negado", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Permiso Negado, para utilizar la aplicación se requiere permisos de ubicación", Toast.LENGTH_LONG).show()
+                    myRef = database.getReference(PATH_USERS + auth.currentUser!!.uid)
+                    myRef.child("available").setValue(false)
+                    auth.signOut()
+                    val intentLogOut = Intent(this, LogInActivity::class.java)
+                    intentLogOut.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+                    changeService.stopListening()
+                    startActivity(intentLogOut)
                 }
                 return
             }
@@ -66,32 +71,6 @@ class MainMenuActivity : AppCompatActivity(), OnMapReadyCallback,
 
     }
 
-    private fun checkLocationPermission() {
-        if (ActivityCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(
-                    this,
-                    android.Manifest.permission.ACCESS_FINE_LOCATION
-                ) ) {
-
-                AlertDialog.Builder(this)
-                    .setTitle("Se requieren permisos de ubicación")
-                    .setMessage("Porfavor otorgue permisos de ubicación para garantizar el funcionamiento normal del app")
-                    .setPositiveButton(
-                        "OK"
-                    ) { _, _ ->
-                        requestLocationPermission()
-                    }
-                    .create()
-                    .show()
-            } else {
-                requestLocationPermission()
-            }
-        }
-    }
 
     private fun requestLocationPermission() {
         ActivityCompat.requestPermissions(
@@ -108,9 +87,12 @@ class MainMenuActivity : AppCompatActivity(), OnMapReadyCallback,
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_menu)
         auth = Firebase.auth
-        checkLocationPermission()
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
+        myRef = database.getReference(PATH_USERS + auth.currentUser!!.uid)
+        myRef.child("available").setValue(true)
+
         changeService = AvailableChangeService(this)
         changeService.startListening()
     }
@@ -129,16 +111,20 @@ class MainMenuActivity : AppCompatActivity(), OnMapReadyCallback,
         {
             R.id.menuLogOut ->
             {
+                //myRef = database.getReference(PATH_USERS + auth.currentUser!!.uid)
+                myRef.child("available").setValue(false)
                 auth.signOut()
                 val intentLogOut = Intent(this, LogInActivity::class.java)
                 intentLogOut.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
                 changeService.stopListening()
                 startActivity(intentLogOut)
+                finish()
+
                 true
             }
             R.id.menuToggleStatus ->
             {
-                myRef = database.getReference(PATH_USERS + auth.currentUser!!.uid)
+                //myRef = database.getReference(PATH_USERS + auth.currentUser!!.uid)
                 myRef.child("available").get().addOnSuccessListener { availableSnapshot ->
                     val isAvailable = availableSnapshot.getValue(Boolean::class.java) ?: false
                     myRef.child("available").setValue(!isAvailable)
@@ -152,6 +138,7 @@ class MainMenuActivity : AppCompatActivity(), OnMapReadyCallback,
                 val intentAvailableUsers = Intent(this, ActiveUsersActivity::class.java)
                 changeService.stopListening()
                 startActivity(intentAvailableUsers)
+                finish()
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -202,8 +189,9 @@ class MainMenuActivity : AppCompatActivity(), OnMapReadyCallback,
             mMap!!.addMarker(MarkerOptions().position(pos).title(marker.name))
         }
 
-        mMap!!.moveCamera(CameraUpdateFactory.zoomTo(10F))
+
         mMap!!.moveCamera(CameraUpdateFactory.newLatLng(LatLng(listMarkers[0].latitude!!, listMarkers[0].longitude!!)))
+        mMap!!.moveCamera(CameraUpdateFactory.zoomTo(10F))
 
     }
 
@@ -219,10 +207,10 @@ class MainMenuActivity : AppCompatActivity(), OnMapReadyCallback,
         location?.let { loc ->
             val pos = LatLng(loc.latitude, loc.longitude)
             //mMap!!.addMarker(MarkerOptions().position(pos).title("Mi Ubicación"))
-            myRef = database.getReference(PATH_USERS+auth.currentUser!!.uid)
+            //myRef = database.getReference(PATH_USERS+auth.currentUser!!.uid)
             myRef.child("latitude").setValue(loc.latitude)
             myRef.child("longitude").setValue(loc.longitude)
-            mMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 16f))
+            mMap!!.animateCamera(CameraUpdateFactory.newLatLngZoom(pos, 12f))
         }
         return true
     }

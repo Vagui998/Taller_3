@@ -3,4 +3,5 @@
     <string name="registerTxtBtn"><u>Regístrate</u></string>
     <string name="title_activity_register">RegisterActivity</string>
     <string name="action_settings">Settings</string>
+    <string name="view_real_time_location_btn_desc">View real time location</string>
 </resources>
